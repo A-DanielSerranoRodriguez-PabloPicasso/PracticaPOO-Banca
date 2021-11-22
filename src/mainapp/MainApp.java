@@ -8,19 +8,23 @@ import models.Persona;
 
 public class MainApp {
 	static Scanner sc = new Scanner(System.in);
-	static String menu1;
-	static int menu2;
-	static int cont = 0;
-	static Persona per1 = new Persona("Dani", "Serra", "12345678Z", 2700);
-	static Persona per2 = new Persona("Jose", "Lopez", "98765432A", 1000);
-	static Persona per3 = new Persona("Pedro", "Martinez", "01928374G", 2000);
-	static CuentaCorriente cc1 = new CuentaCorriente(1234, 0, per1);
-	static CuentaCorriente cc2 = new CuentaCorriente(5678, 0, per2);
-	static CuentaCorriente cc3 = new CuentaCorriente(9012, 0, per3);
 	static ArrayList<Persona> gente = new ArrayList<Persona>();
 	static int contador = 1;
 
 	public static void main(String[] args) {
+		// Ejemplos rapidos
+		Persona per1 = new Persona("Dani", "Serra", "12345678Z", 2700);
+		Persona per2 = new Persona("Jose", "Lopez", "98765432A", 1000);
+		Persona per3 = new Persona("Pedro", "Martinez", "01928374G", 2000);
+		gente.add(per1);
+		gente.add(per2);
+		gente.add(per3);
+		CuentaCorriente cc1 = new CuentaCorriente(1234, 0, per1);
+		CuentaCorriente cc2 = new CuentaCorriente(5678, 0, per2);
+		CuentaCorriente cc3 = new CuentaCorriente(9012, 0, per3);
+		per1.setCuenta(cc1);
+		per2.setCuenta(cc2);
+		per3.setCuenta(cc3);
 
 		do {
 			System.out.println("a. Anadir persona");
@@ -28,14 +32,14 @@ public class MainApp {
 			System.out.println("c. Borrar persona");
 			System.out.println("d. Salir");
 			System.out.print(": ");
-			menu1 = sc.next();
-			opciones();
-		} while (menu1 != "d");
+		} while (opciones(sc.next()));
 
 		sc.close();
 	}
 
-	private static void opciones() {
+	private static boolean opciones(String menu1) {
+		int cont = 1;
+
 		switch (menu1) {
 		case "a":
 			System.out.println("\nIntroduce los datos de la persona");
@@ -48,7 +52,7 @@ public class MainApp {
 			System.out.print("Sueldo: ");
 			Double sueldo = Double.parseDouble(sc.next());
 			Persona persona = new Persona(nom, ape, dni, sueldo);
-			CuentaCorriente cuenta = new CuentaCorriente(contador, 0, persona);
+			CuentaCorriente cuenta = new CuentaCorriente(contador++, 0, persona);
 			persona.setCuenta(cuenta);
 			gente.add(persona);
 			System.out.println();
@@ -57,15 +61,13 @@ public class MainApp {
 		case "b":
 			System.out.println();
 			if (gente.size() > 0) {
-				int cont1 = 1;
 				for (Persona pers : gente) {
-					System.out.println(cont1++ + ". " + pers.getDni() + " " + pers.getNombre());
+					System.out.println(cont++ + ". " + pers.getDni() + " " + pers.getNombre());
 				}
 				System.out.print("Elige a la persona: ");
-				menu2 = Integer.parseInt(sc.next());
-				cont1 = 1;
+				cont = 1;
 				try {
-					menuPersona(gente.get(menu2 - 1));
+					menuPersona(gente.get(Integer.parseInt(sc.next()) - 1));
 				} catch (Exception e) {
 					System.out.println("Elige un numero válido");
 				}
@@ -76,30 +78,32 @@ public class MainApp {
 			break;
 
 		case "c":
-			int cont2 = 1;
 			System.out.println();
 			for (Persona pers : gente) {
-				System.out.println(cont2++ + ". " + pers.getDni() + " " + pers.getNombre());
+				System.out.println(cont++ + ". " + pers.getDni() + " " + pers.getNombre());
 			}
+			cont = 1;
 			System.out.print("¿Que cuenta quieres borrar? ");
-			menu2 = Integer.parseInt(sc.next());
-			gente.remove(menu2 - 1);
-			cont2 = 1;
+			gente.remove(Integer.parseInt(sc.next()) - 1);
 			System.out.println();
 			break;
 
 		case "d":
 			System.out.println();
-			menu1 = "d";
 			System.out.println("Ta luego figura");
-			break;
+			return false;
 
 		default:
+			System.out.println();
+			System.out.println("Introduce una opcion correcta");
+			System.out.println();
 			break;
 		}
+		return true;
 	}
 
 	private static void menuPersona(Persona persona) {
+		System.out.println();
 		do {
 			System.out.println("1. Cobrar sueldo");
 			System.out.println("2. Sacar pasta");
@@ -107,13 +111,11 @@ public class MainApp {
 			System.out.println("4. Mostrar detalles de la persona");
 			System.out.println("5. Salir");
 			System.out.print(": ");
-			menu2 = Integer.parseInt(sc.next());
-			accionesPersona(persona);
-		} while (menu2 != -2);
+		} while (accionesPersona(Integer.parseInt(sc.next()), persona));
 	}
 
-	private static void accionesPersona(Persona persona) {
-		switch (menu2) {
+	private static boolean accionesPersona(int opcion, Persona persona) {
+		switch (opcion) {
 		case 1:
 			persona.cobrarSueldo();
 			System.out.println();
@@ -145,14 +147,16 @@ public class MainApp {
 			break;
 
 		case 5:
-			menu2 = -2;
 			System.out.println();
-			break;
+			return false;
 
 		default:
+			System.out.println();
 			System.out.println("Introduce una opcion correcta");
+			System.out.println();
 			break;
 		}
+		return true;
 	}
 
 }
