@@ -35,6 +35,13 @@ public class CuentaCorriente {
 	}
 
 	// Methods
+
+	/**
+	 * Aumenta la cantidad del saldo disponible.
+	 * 
+	 * @param cantidad Cantidad que queremos aumentar.
+	 * @throws Exception Si la cantidad es negativa, saltara una excepcion.
+	 */
 	public void sumarCantidad(double cantidad) throws Exception {
 		if (cantidad < 0)
 			throw new Exception("Introduce una cantidad real");
@@ -42,13 +49,23 @@ public class CuentaCorriente {
 			this.saldo += cantidad;
 	}
 
+	/**
+	 * Reduce la cantidad del saldo disponible.
+	 * 
+	 * @param cantidad Cantidad que queremos reducir.
+	 * @throws Exception Si la cantidad es negativa, saltara una excepcion.
+	 */
 	public void restarCantidad(double cantidad) throws Exception {
-		if (cantidad > this.saldo)
-			throw new Exception("No tienes tanto dinero");
-		else if (cantidad < 0)
-			throw new Exception("Introduce una cantidad real");
-		else
-			this.saldo -= cantidad;
+		if (this.saldo == 0) {
+			System.out.println("No puedes retirar dinero");
+		} else {
+			if (cantidad > this.saldo)
+				throw new Exception("No tienes tanto dinero");
+			else if (cantidad < 0)
+				throw new Exception("Introduce una cantidad real");
+			else
+				this.saldo -= cantidad;
+		}
 	}
 
 	// toString

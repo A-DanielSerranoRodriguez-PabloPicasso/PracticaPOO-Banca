@@ -41,6 +41,10 @@ public class Persona {
 	}
 
 	// Methods
+
+	/**
+	 * Permite cobrar el sueldo del dueño de la cuenta corriente.
+	 */
 	public void cobrarSueldo() {
 		try {
 			this.cuenta.sumarCantidad(this.sueldo);
@@ -49,6 +53,11 @@ public class Persona {
 		}
 	}
 
+	/**
+	 * Permite sacar una cantidad de dinero determinada de la cuenta corriente.
+	 * 
+	 * @param cantidad Cantidad de dinero que vamos a sacar.
+	 */
 	public void sacarPasta(double cantidad) {
 		try {
 			this.cuenta.restarCantidad(cantidad);
@@ -57,6 +66,14 @@ public class Persona {
 		}
 	}
 
+	/**
+	 * Permite subir el sueldo una cantidad determinada, sumandoselo al sueldo
+	 * anterior.
+	 * 
+	 * @param nuevoSueldo Cuanto queremos subir nuestro sueldo.
+	 * @throws Exception Si la cantidad que queremos subir nuestro sueldo es
+	 *                   negativa, saltara una excepcion.
+	 */
 	public void subirSueldo(double nuevoSueldo) throws Exception {
 		if (nuevoSueldo < 0)
 			throw new Exception("Introduce una cantidad real");
