@@ -29,6 +29,7 @@ public class MainApp {
 		per1.setCuenta(cc1);
 		per2.setCuenta(cc2);
 		per3.setCuenta(cc3);
+		// FIN DE EJEMPLOS
 
 		do {
 			System.out.println("a. Anadir persona");
@@ -41,6 +42,76 @@ public class MainApp {
 		sc.close();
 	}
 
+	/**
+	 * Recibe un 'String' y comprueba si la primera letra es mayuscula y si hay
+	 * algun numero o caracter especial en el nombre.
+	 * 
+	 * @param NomApe String a comprobar
+	 * @return Devuelve verdadero o falso.
+	 */
+	private static boolean comprobarNomApe(String NomApe) {
+		if (!Character.isUpperCase(NomApe.toCharArray()[0])) {
+			return false;
+		}
+		for (int i = 0; i < NomApe.toCharArray().length; i++) {
+			if (Character.isDigit(NomApe.toCharArray()[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Recibe un 'String' y comprueba que tiene 9 letras, que las 8 primeras son
+	 * numeros y que la ultima es una letra mayuscula.
+	 * 
+	 * @param dni String a comprobar.
+	 * @return Devuelve verdadero o falso.
+	 */
+	private static boolean comprobarDNI(String dni) {
+		if (dni.toCharArray().length == 9) {
+			for (int i = 0; i < dni.toCharArray().length - 1; i++) {
+				if (Character.isLetter(dni.toCharArray()[i])) {
+					return false;
+				}
+			}
+			if (!Character.isLetter(dni.toCharArray()[dni.toCharArray().length - 1])) {
+				return false;
+			} else {
+				if (!Character.isUpperCase(dni.toCharArray()[dni.toCharArray().length - 1])) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Recibe un 'String' y comprueba que no hay letras y que el numero introducido
+	 * es mayor que 0.
+	 * 
+	 * @param sueldo String a comprobar.
+	 * @return Devuelve verdadero o falso.
+	 */
+	private static boolean comprobarSueldo(String sueldo) {
+		sueldo.toCharArray();
+		for (int i = 0; i < sueldo.toCharArray().length; i++) {
+			if (Character.isLetter(sueldo.toCharArray()[i]))
+				return false;
+		}
+		if (Double.parseDouble(sueldo) < 0)
+			return false;
+		else
+			return true;
+	}
+
+	/**
+	 * Menu con las acciones disponibles con respecto a 'Persona'
+	 * 
+	 * @param menu1 Opcion del menu introducida.
+	 * @return Devuelve verdadero o falso (falso sale del programa).
+	 */
 	private static boolean menuPersona(String menu1) {
 		int cont = 1;
 		int opc;
@@ -48,15 +119,33 @@ public class MainApp {
 		switch (menu1) {
 		case "a": // Recogemos todos los datos de la persona que queremos crear
 			System.out.println("\nIntroduce los datos de la persona");
-			System.out.print("Nombre: ");
+			System.out.print("Nombre: "); // TODO Averiguar porque narices con un sc.nextLine() se salta directamente
+											// el input
 			String nom = sc.next();
+			while (!comprobarNomApe(nom)) {
+				System.out.print("Introduce un nombre válido: ");
+				nom = sc.next();
+			}
 			System.out.print("Apellido: ");
 			String ape = sc.next();
+			while (!comprobarNomApe(ape)) {
+				System.out.print("Introduce un apellido válido: ");
+				ape = sc.next();
+			}
 			System.out.print("DNI: ");
 			String dni = sc.next();
+			while (!comprobarDNI(dni)) {
+				System.out.print("Introduce un DNI válido: ");
+				dni = sc.next();
+			}
 			System.out.print("Sueldo: ");
-			Double sueldo = Double.parseDouble(sc.next());
-			Persona persona = new Persona(nom, ape, dni, sueldo);
+			String sueldo;
+			sueldo = sc.next();
+			while (!comprobarSueldo(sueldo)) {
+				System.out.print("Introduce un sueldo válido: ");
+				sueldo = sc.next();
+			}
+			Persona persona = new Persona(nom, ape, dni, Double.parseDouble(sueldo));
 			CuentaCorriente cuenta = new CuentaCorriente(contador++, 0, persona);
 			persona.setCuenta(cuenta); // Le asignamos la nueva cuenta creada. En el constructor se pone a NULL
 			gente.add(persona); // Metemos la persona en un ArrayList
@@ -126,8 +215,13 @@ public class MainApp {
 		return true;
 	}
 
-	// Menu con lo que podemos hacer con la cuenta bancaria de la persona con la que
-	// hemos accedido
+	/**
+	 * Menu con lo que podemos hacer con la cuenta bancaria de la persona con la que
+	 * hemos accedido.
+	 * 
+	 * @param persona Objeto 'Persona' que hemos seleccionado anteriormente en
+	 *                'menuPersona'.
+	 */
 	private static void opcionesCuentaPersona(Persona persona) {
 		System.out.println();
 		System.out.println("Bienvenid@ " + persona.getNombre());
@@ -141,6 +235,12 @@ public class MainApp {
 		} while (accionesCuenta(Integer.parseInt(sc.next()), persona));
 	}
 
+	/**
+	 * Menu con las acciones disponibles con respecto a 'CuentaBancaria'
+	 * 
+	 * @param menu1 Opcion del menu introducida.
+	 * @return Devuelve verdadero o falso (falso sale del programa).
+	 */
 	private static boolean accionesCuenta(int opcion, Persona persona) {
 		switch (opcion) {
 		case 1:

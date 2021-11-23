@@ -6,6 +6,14 @@ public class Persona {
 	private CuentaCorriente cuenta;
 
 	// Const
+	/**
+	 * Constructor que crea un objeto 'Persona'.
+	 * 
+	 * @param nombre    String con el nombre.
+	 * @param apellidos String con el apellido.
+	 * @param dni       String con el DNI.
+	 * @param sueldo    Double con el sueldo.
+	 */
 	public Persona(String nombre, String apellidos, String dni, double sueldo) {
 		super();
 		this.nombre = nombre;
@@ -16,26 +24,56 @@ public class Persona {
 	}
 
 	// Getters - Setters
+	/**
+	 * Obtiene el nombre.
+	 * 
+	 * @return
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * Obtiene el apellido.
+	 * 
+	 * @return
+	 */
 	public String getApellidos() {
 		return apellidos;
 	}
 
+	/**
+	 * Obtiene el DNI.
+	 * 
+	 * @return
+	 */
 	public String getDni() {
 		return dni;
 	}
 
+	/**
+	 * Obtiene el sueldo.
+	 * 
+	 * @return
+	 */
 	public double getSueldo() {
 		return sueldo;
 	}
 
+	/**
+	 * Obtiene la cuenta corriente correspondiente.
+	 * 
+	 * @return
+	 */
 	public CuentaCorriente getCuenta() {
 		return cuenta;
 	}
 
+	/**
+	 * Define una cuenta del objeto.
+	 * 
+	 * @param cuenta
+	 */
 	public void setCuenta(CuentaCorriente cuenta) {
 		this.cuenta = cuenta;
 	}

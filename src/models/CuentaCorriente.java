@@ -14,22 +14,47 @@ public class CuentaCorriente {
 	}
 
 	// Getters - Setters
+	/**
+	 * Obtiene el numero de cuenta.
+	 * 
+	 * @return Entero.
+	 */
 	public int getNumeroCuenta() {
 		return numeroCuenta;
 	}
 
+	/**
+	 * Define el numero de cuenta.
+	 * 
+	 * @param numeroCuenta Entero.
+	 */
 	public void setNumeroCuenta(int numeroCuenta) {
 		this.numeroCuenta = numeroCuenta;
 	}
 
+	/**
+	 * Obtiene el saldo de la cuenta.
+	 * 
+	 * @return Entero.
+	 */
 	public double getSaldo() {
 		return saldo;
 	}
 
+	/**
+	 * Define el saldo de la cuenta.
+	 * 
+	 * @param saldo Double.
+	 */
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 
+	/**
+	 * Obtiene el titular de la cuenta.
+	 * 
+	 * @return Persona (objeto).
+	 */
 	public Persona getTitular() {
 		return titular;
 	}
