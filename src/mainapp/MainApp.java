@@ -42,13 +42,8 @@ public class MainApp {
 		sc.close();
 	}
 
-	/**
-	 * Recibe un 'String' y comprueba si la primera letra es mayuscula y si hay
-	 * algun numero o caracter especial en el nombre.
-	 * 
-	 * @param NomApe String a comprobar
-	 * @return Devuelve verdadero o falso.
-	 */
+//	  Recibe un 'String' y comprueba si la primera letra es mayuscula y si hay
+//	  algun numero o caracter especial en el nombre.
 	private static boolean comprobarNomApe(String NomApe) {
 		if (!Character.isUpperCase(NomApe.toCharArray()[0])) {
 			return false;
@@ -61,13 +56,8 @@ public class MainApp {
 		return true;
 	}
 
-	/**
-	 * Recibe un 'String' y comprueba que tiene 9 letras, que las 8 primeras son
-	 * numeros y que la ultima es una letra mayuscula.
-	 * 
-	 * @param dni String a comprobar.
-	 * @return Devuelve verdadero o falso.
-	 */
+//	  Recibe un 'String' y comprueba que tiene 9 letras, que las 8 primeras son
+//	  numeros y que la ultima es una letra mayuscula.
 	private static boolean comprobarDNI(String dni) {
 		if (dni.toCharArray().length == 9) {
 			for (int i = 0; i < dni.toCharArray().length - 1; i++) {
@@ -87,13 +77,8 @@ public class MainApp {
 		return false;
 	}
 
-	/**
-	 * Recibe un 'String' y comprueba que no hay letras y que el numero introducido
-	 * es mayor que 0.
-	 * 
-	 * @param sueldo String a comprobar.
-	 * @return Devuelve verdadero o falso.
-	 */
+//	  Recibe un 'String' y comprueba que no hay letras y que el numero introducido
+//	  es mayor que 0.
 	private static boolean comprobarSueldo(String sueldo) {
 		sueldo.toCharArray();
 		for (int i = 0; i < sueldo.toCharArray().length; i++) {
@@ -106,12 +91,7 @@ public class MainApp {
 			return true;
 	}
 
-	/**
-	 * Menu con las acciones disponibles con respecto a 'Persona'
-	 * 
-	 * @param menu1 Opcion del menu introducida.
-	 * @return Devuelve verdadero o falso (falso sale del programa).
-	 */
+	// Menu con las acciones disponibles con respecto a 'Persona'
 	private static boolean menuPersona(String menu1) {
 		int cont = 1;
 		int opc;
@@ -215,13 +195,9 @@ public class MainApp {
 		return true;
 	}
 
-	/**
-	 * Menu con lo que podemos hacer con la cuenta bancaria de la persona con la que
-	 * hemos accedido.
-	 * 
-	 * @param persona Objeto 'Persona' que hemos seleccionado anteriormente en
-	 *                'menuPersona'.
-	 */
+//	  Menu con lo que podemos hacer con la cuenta bancaria de la persona con la que
+//	  hemos accedido.
+
 	private static void opcionesCuentaPersona(Persona persona) {
 		System.out.println();
 		System.out.println("Bienvenid@ " + persona.getNombre());
@@ -235,12 +211,7 @@ public class MainApp {
 		} while (accionesCuenta(Integer.parseInt(sc.next()), persona));
 	}
 
-	/**
-	 * Menu con las acciones disponibles con respecto a 'CuentaBancaria'
-	 * 
-	 * @param menu1 Opcion del menu introducida.
-	 * @return Devuelve verdadero o falso (falso sale del programa).
-	 */
+	// Menu con las acciones disponibles con respecto a 'CuentaBancaria'.
 	private static boolean accionesCuenta(int opcion, Persona persona) {
 		switch (opcion) {
 		case 1:
